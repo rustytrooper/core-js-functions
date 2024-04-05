@@ -78,8 +78,11 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  // throw new Error('Not implemented');
+  return function power(x) {
+    return x ** exponent;
+  };
 }
 
 /**
@@ -132,8 +135,20 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // throw new Error('Not implemented');
+  return function trying() {
+    let counter = 0;
+    while (counter <= attempts) {
+      try {
+        const result = func();
+        return result;
+      } catch (error) {
+        counter += 1;
+      }
+    }
+    return attempts;
+  };
 }
 
 /**
